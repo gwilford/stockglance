@@ -142,9 +142,9 @@ class StockGlance implements HomePageView {
     //
 
     // Per column metadata
-    private final String[] names = {"Symbol", "Stock", "Price", "Change", "Balance", "Day", "7 Day", "30 Day", "365 Day"};
-    private final String[] types = {"Text", "Text", "Currency2", "Currency2", "Currency0", "Percent", "Percent", "Percent", "Percent"};
-    private final Class[] classes = {String.class, String.class, Double.class, Double.class, Double.class, Double.class, Double.class, Double.class, Double.class};
+    private final String[] names = {"Stock", "Day", "7 Day", "30 Day", "365 Day"};
+    private final String[] types = {"Text", "Percent", "Percent", "Percent", "Percent"};
+    private final Class[] classes = {String.class, Double.class, Double.class, Double.class, Double.class};
     private final Vector<String> columnNames = new Vector<>(Arrays.asList(names));
 
     // Per row metadata
@@ -248,15 +248,8 @@ class StockGlance implements HomePageView {
                 if (!Double.isNaN(price) && (!Double.isNaN(price1) || !Double.isNaN(price7)
                         || !Double.isNaN(price30) || !Double.isNaN(price365))) {
                     Vector<Object> entry = new Vector<>();
-                    Long bal = balances.get(curr);
-                    Double balance = (bal == null) ? 0.0 : curr.getDoubleValue(bal) * price;
-                    totalBalance += balance;
 
-                    entry.add(curr.getTickerSymbol());
                     entry.add(curr.getName());
-                    entry.add(price);
-                    entry.add(price - price1);
-                    entry.add(balance);
                     entry.add((price - price1) / price1);
                     entry.add((price - price7) / price7);
                     entry.add((price - price30) / price30);
@@ -267,17 +260,6 @@ class StockGlance implements HomePageView {
                 }
             }
         }
-        Vector<Object> entry = new Vector<>();
-        entry.add("\u03A3"); // Sigma (sorts after all letters in stock names)
-        entry.add(null);
-        entry.add(null);
-        entry.add(null);
-        entry.add(totalBalance);
-        entry.add(null);
-        entry.add(null);
-        entry.add(null);
-        entry.add(null);
-        data.add(entry);
 
         return data;
     }
