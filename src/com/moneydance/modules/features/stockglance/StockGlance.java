@@ -233,9 +233,6 @@ class StockGlance implements HomePageView {
                 cal.get(Calendar.DAY_OF_MONTH));
         Vector<Vector<Object>> data = new Vector<>();
 
-        HashMap<CurrencyType, Long> balances = sumBalancesByCurrency(book);
-        Double totalBalance = 0.0;
-
         for (CurrencyType curr : allCurrencies) {
             if (!curr.getHideInUI() && curr.getCurrencyType() == CurrencyType.Type.SECURITY) {
                 Double price = priceOrNaN(curr, today, 0);
@@ -342,17 +339,6 @@ class StockGlance implements HomePageView {
             }
         }
         return snapshots.isEmpty(); // If no snapshots, use fixed rate; otherwise didn't find snapshot
-    }
-
-    private HashMap<CurrencyType, Long> sumBalancesByCurrency(AccountBook book) {
-        HashMap<CurrencyType, Long> totals = new HashMap<>();
-        for (Account acct : AccountUtil.allMatchesForSearch(book.getRootAccount(), AcctFilter.ALL_ACCOUNTS_FILTER)) {
-            CurrencyType curr = acct.getCurrencyType();
-            Long total = totals.get(curr);
-            total = ((total == null) ? 0L : total) + acct.getCurrentBalance();
-            totals.put(curr, total);
-        }
-        return totals;
     }
 
     //
