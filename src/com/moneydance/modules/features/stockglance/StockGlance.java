@@ -142,7 +142,7 @@ class StockGlance implements HomePageView {
     //
 
     // Per column metadata
-    private final String[] names = {"Stock", "Day", "7 Day", "30 Day", "365 Day"};
+    private final String[] names = {"Stock", "Day%", "Week%", "Month%", "Year%"};
     private final String[] types = {"Text", "Percent", "Percent", "Percent", "Percent"};
     private final Class[] classes = {String.class, Double.class, Double.class, Double.class, Double.class};
     private final Vector<String> columnNames = new Vector<>(Arrays.asList(names));
@@ -170,7 +170,7 @@ class StockGlance implements HomePageView {
                 // Percent needs to be thinner than other columns
                 if (types[column].equals("Percent")) {
                     TableColumn tableColumn = getColumnModel().getColumn(column);
-		    tableColumn.setMaxWidth( 60 );
+		    tableColumn.setMaxWidth( 55 );
                 }
                 return c;
             }
@@ -455,7 +455,8 @@ class StockGlance implements HomePageView {
                 if (isZero((Double) value)) {
                     value = 0.0;
                 }
-                setText(StringUtils.formatPercentage((Double) value, decimalSeparator) + "%");
+                //setText(StringUtils.formatPercentage((Double) value, decimalSeparator) + "%");
+                setText(StringUtils.formatPercentage((Double) value, decimalSeparator));
                 if ((Double) value < 0.0) {
                     setForeground(Color.RED);
                 } else {
