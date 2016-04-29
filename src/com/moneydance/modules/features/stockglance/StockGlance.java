@@ -167,11 +167,10 @@ class StockGlance implements HomePageView {
                 // Alternating row color bands
                 if (!isRowSelected(row))
                     c.setBackground(row % 2 == 0 ? getBackground() : lightLightGray);
-                // Balance needs to be wider than other columns
-                if (types[column].equals("Currency0")) {
-                    int rendererWidth = c.getPreferredSize().width;
+                // Percent needs to be thinner than other columns
+                if (types[column].equals("Percent")) {
                     TableColumn tableColumn = getColumnModel().getColumn(column);
-                    tableColumn.setMinWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getMinWidth()));
+		    tableColumn.setMaxWidth( 60 );
                 }
                 return c;
             }
