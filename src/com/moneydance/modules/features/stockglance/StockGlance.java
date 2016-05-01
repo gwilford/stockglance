@@ -88,7 +88,9 @@ class StockGlance implements HomePageView {
                 DefaultTableModel tableModel = makeTableModel(data);
                 table = makeTable(tableModel);
                 tablePane = new JScrollPane(table);
+		//table.setFillsViewportHeight(true);
                 tablePane.setBorder(BorderFactory.createCompoundBorder(MoneydanceLAF.homePageBorder, BorderFactory.createEmptyBorder(0, 0, 0, 0)));
+                //tablePane.setBorder(null);
             }
         }
         return tablePane;
@@ -219,6 +221,26 @@ class StockGlance implements HomePageView {
 
         table.setAutoCreateRowSorter(true);
         table.getRowSorter().toggleSortOrder(0); // Default is to sort by symbol
+
+//TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+//TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+//table.setRowSorter(sorter);
+//List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+ 
+//int columnIndexToSort = 0;
+//sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+ 
+//sorter.setSortKeys(sortKeys);
+//sorter.sort();
+
+//TableRowSorter<TableModel> sorter 
+ //   = new TableRowSorter<TableModel>(table.getModel());
+//List <RowSorter.SortKey> sortKeys 
+//    = new ArrayList<RowSorter.SortKey>();
+//sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+//sorter.setSortKeys(sortKeys); 
+//table.setRowSorter(sorter);
+
         return table;
     }
 
