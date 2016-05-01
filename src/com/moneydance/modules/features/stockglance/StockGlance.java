@@ -170,7 +170,7 @@ class StockGlance implements HomePageView {
                 // Percent needs to be thinner than other columns
                 if (types[column].equals("Percent")) {
                     TableColumn tableColumn = getColumnModel().getColumn(column);
-		    tableColumn.setMaxWidth( 55 );
+		    tableColumn.setMaxWidth( 50 );
                 }
                 return c;
             }
